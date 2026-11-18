@@ -158,3 +158,6 @@ vite.config.ts.timestamp-*
 
 # Venv
 backend/venv/
+
+# pycache
+__pycache__/
