@@ -30,7 +30,7 @@ def admin_get_all_training_sessions():
 
 @training_sessions_bp.route("/api/v1.0/training_sessions/me", methods=["GET"])
 @jwt_required
-def get_user_training_session():
+def get_user_training_sessions():
     data_to_return = []
     for training_session in list(training_sessions.find({"user_id": g.user_id})):
         training_session["_id"] = str(training_session["_id"])
