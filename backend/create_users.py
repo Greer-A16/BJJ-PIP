@@ -12,14 +12,44 @@ def make_object_id():
 
 now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
+# user_list = [
+#     {
+#         "email": "homer@springfield.net",
+#         "password_hash": b"homer_s",
+#         "username": "ashtongreer",
+#         "first_name": "Ashton",
+#         "last_name": "Greer",
+#         "dob": "20/08/202",
+#         "belt_rank": "Blue",
+#         "stripe_no": 2,
+#         "profile_img_path": "",
+#         "admin": False,
+#     },
+# ]
+
+# user_list = [
+#     {
+#         "email": "admin@bjjpip,com",
+#         "password_hash": b"admin_login",
+#         "username": "adminuser",
+#         "first_name": "Admin",
+#         "last_name": "User",
+#         "dob": "20/08/2004",
+#         "belt_rank": "Blue",
+#         "stripe_no": 2,
+#         "profile_img_path": "",
+#         "admin": True,
+#     },
+# ]
+
 user_list = [
     {
-        "email": "homer@springfield.net",
-        "password_hash": b"homer_s",
-        "username": "ashtongreer",
-        "first_name": "Ashton",
-        "last_name": "Greer",
-        "dob": "20/08/202",
+        "email": "user2@bjjpip,com",
+        "password_hash": b"user2_login",
+        "username": "user2",
+        "first_name": "User",
+        "last_name": "Two",
+        "dob": "20/08/2004",
         "belt_rank": "Blue",
         "stripe_no": 2,
         "profile_img_path": "",

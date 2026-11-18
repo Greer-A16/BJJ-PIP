@@ -25,6 +25,7 @@ def jwt_required(func):
                 return make_response(jsonify( {'message' : 'Token has been cancelled' } ), 401)
             g.user_id = data.get("user_id")
             g.username = data.get("user")
+            g.admin = data['admin']
             return func(*args, **kwargs)
     return jwt_required_wrapper
 
