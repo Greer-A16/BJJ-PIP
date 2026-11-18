@@ -83,21 +83,16 @@ def create_position():
 def edit_position(id):
     user_id = g.user_id
 
-    required_fields = ["duration_minutes", "attire", "session_date", "session_type"]
+    required_fields = ["name", "attire", "description", "position_type"]
 
     exists = positions.find_one({"_id": ObjectId(id)})
     if exists is None:
-        return make_response(jsonify({"error": "Invalid Training Session ID"}), 404)
+        return make_response(jsonify({"error": "Invalid Position ID"}), 404)
 
     if exists.get("user_id") != user_id:
-        return make_response(jsonify({"error": "You can only edit your own training sessions"}), 403)
+        return make_response(jsonify({"error": "You can only edit your own Positions"}), 403)
 
     if all(field in request.form for field in required_fields):
-        try:
-            duration_minutes = int(request.form["duration_minutes"])
-        except ValueError:
-            return make_response(jsonify({"error": "duration_minutes must be a number"}), 400)
-
         now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
         updated_position = {
@@ -116,10 +111,10 @@ def edit_position(id):
         )
 
         if result.matched_count == 0:
-            return make_response(jsonify({"error": "Training Session not found"}), 404)
+            return make_response(jsonify({"error": "Position not found"}), 404)
 
         updated_position_link = ("http://localhost:5001/api/v1.0/positions/" + id)
-        return make_response(jsonify({"message": "Training Session Updated", "url": updated_position_link}))
+        return make_response(jsonify({"message": "Position Updated", "url": updated_position_link}))
         
 @positions_bp.route("/api/v1.0/positions/<string:id>", methods=["DELETE"])
 @jwt_required
