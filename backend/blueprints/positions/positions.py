@@ -241,7 +241,7 @@ def edit_position(id):
             "updated_at": now,
         }
 
-        ## PUT query containing the position and user ID's
+        ## PUT query containing the position and user ID
         query = {"_id": ObjectId(id), "user_id": g.user_id}
 
         ## updated position
