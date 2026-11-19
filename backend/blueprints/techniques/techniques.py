@@ -140,7 +140,7 @@ def delete_technique(id):
     else:
         return make_response(jsonify({"error": "Invalid Training Session ID"}), 404)
 
-
+ 
 @techniques_bp.route("/api/v1.0/technique_description/<string:id>", methods=["GET"])
 @jwt_required
 def descriptive_technique(id):
@@ -156,9 +156,12 @@ def descriptive_technique(id):
         ending_position = technique["ending_position"]
         starting = positions.find_one({'_id': ObjectId(starting_position), "user_id": g.user_id})
         ending = positions.find_one({'_id': ObjectId(ending_position), "user_id": g.user_id})
-        data.append(technique)
-        data.append(starting)
-        data.append(ending)
-        return make_response(jsonify(data), 200)
+
+        if starting:
+            starting["_id"] = str(starting["_id"])
+        if ending:
+            ending["_id"] = str(ending["_id"])
+        response = {"Technique Name: ": technique["name"], "Starting Position: ": starting["name"], "Ending Position: ": ending["name"],  "Details: ": technique["description"]}
+        return make_response(jsonify(response), 200)
     else:
         return make_response(jsonify({"error": "technique Not Found"}), 404)
