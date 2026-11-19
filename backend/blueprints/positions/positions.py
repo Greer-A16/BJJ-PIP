@@ -103,7 +103,7 @@ def show_one_position(id):
     ## If the user is an admin
     if g.admin:
 
-        ## Find the position by its ID without needing to be the creating using
+        ## Find the position by its ID without needing to be the creating user
         position = positions.find_one({"_id": ObjectId(id)})
 
     ## If the user does not have admin access
