@@ -77,7 +77,3 @@ def get_all_techniques_from_one_session(id):
             data_to_return.append(technique)
 
     return make_response(jsonify(data_to_return), 200)
-
-@training_session_techniques_bp.route("/api/v1.0/descriptive_technique/<string:id>", methods=["GET"])
-@jwt_required
-def descriptive_technique(id):

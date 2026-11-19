@@ -1,0 +1,19 @@
+To locally run the BJJ-PIP backend, please follow thse steps:
+
+1. VENV setup
+
+Make sure you are in the /backend directory, and run the following commands:
+
+############
+python -m venv venv
+venv\Scripts\activate
+############
+
+2. Package Installation
+############
+pip install flask
+pip install bson
+pip install pymongo
+pip install PyJWT
+pip install bcrypt
+###

@@ -9,6 +9,7 @@ from datetime import datetime, timezone, timedelta
 techniques_bp = Blueprint("techniques_bp", __name__)
 
 techniques = globals.db.techniques
+positions = globals.db.positions
 
 @techniques_bp.route("/api/v1.0/techniques", methods=["GET"])
 @jwt_required
@@ -138,3 +139,26 @@ def delete_technique(id):
         return make_response("", 204)
     else:
         return make_response(jsonify({"error": "Invalid Training Session ID"}), 404)
+
+
+@techniques_bp.route("/api/v1.0/technique_description/<string:id>", methods=["GET"])
+@jwt_required
+def descriptive_technique(id):
+
+    data = []
+    if g.admin:
+        technique = techniques.find_one({"_id": ObjectId(id)})
+    else:
+        technique = techniques.find_one({'_id': ObjectId(id), "user_id": g.user_id})
+    if technique is not None:
+        technique["_id"] = str(technique["_id"])
+        starting_position = technique["starting_position"]
+        ending_position = technique["ending_position"]
+        starting = positions.find_one({'_id': ObjectId(starting_position), "user_id": g.user_id})
+        ending = positions.find_one({'_id': ObjectId(ending_position), "user_id": g.user_id})
+        data.append(technique)
+        data.append(starting)
+        data.append(ending)
+        return make_response(jsonify(data), 200)
+    else:
+        return make_response(jsonify({"error": "technique Not Found"}), 404)
