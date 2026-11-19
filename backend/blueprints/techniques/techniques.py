@@ -106,7 +106,7 @@ def show_one_technique(id):
     ## If the user is an admin
     if g.admin:
 
-        ## Find the position by its ID while checking that the requesting user is the creating user
+        ## Find the technique by its ID while checking that the requesting user is the creating user
         technique = techniques.find_one({"_id": ObjectId(id)})
 
     ## If the user does not have admin access
